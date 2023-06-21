@@ -8,8 +8,8 @@ dt = 1/sr; % período infinitesimal
 %plot com o descanso e com uma música
 
 rest_1 = EEG_Rest(1:1,:);
-song1_1 = EEG_Songs(1:1,:);
-song2_channel1 = EEG_Songs(1:12,:);
+song1_sensor1 = EEG_Songs(1:1,:);
+song2_sensor1 = EEG_Songs(2:2, :);
 %%
 figure(1)
 tt = (1:length(rest_1))*dt;
@@ -18,7 +18,7 @@ plot(tt, rest_1)
 hold off
 %%
 figure (2)
-[pxx1,f1]=pwelch(song2_channel1,2*sr,sr/2,[],sr);
+[pxx1,f1]=pwelch(song2_sensor1,2*sr,sr/2,[],sr);
 
 plot(f1, pxx1)
 
@@ -36,8 +36,8 @@ axis xy
 
 %%
 %Espectograma da musica
-figure(3)
-[s,f,t]=spectrogram(song1_1,2*sr,sr/2,[],sr);
+figure(4)
+[s,f,t]=spectrogram(song1_sensor1,2*sr,sr/2,[],sr);
 imagesc(t,f,abs(s))
 colorbar
 clim([0 50]) %caxis não é recomendado
@@ -48,10 +48,12 @@ axis xy
 
 %%
 %Espectograma da musica
-figure(4)
-[s,f,t]=spectrogram(song1_1,2*sr,sr/2,[],sr);
+figure(5)
+[s,f,t]=spectrogram(song2_sensor1,2*sr,sr/2,[],sr);
 imagesc(t,f,abs(s))
 colorbar
+clim([0 50]) %caxis não é recomendado
+ylim([0 50])
 ylabel('Frequencia (Hz)')
 xlabel('Time (s)')
 axis xy
