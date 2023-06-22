@@ -1,15 +1,20 @@
 load('music_listening_experiment_s01.mat')
-%qual a hipótese?
 
 sr = Fs; % taxa de amostragem
 dt = 1/sr; % período infinitesimal
 
-%comparar a atividade cerebral para um sensor
-%plot com o descanso e com uma música
-
 rest_1 = EEG_Rest(1:1,:);
-song1_sensor1 = EEG_Songs(1:1,:);
-song2_sensor1 = EEG_Songs(2:2, :);
+
+% Reordenando os dados para acessar a música pela paginação
+aux = permute(EEG_Songs,[2 3 1]);
+
+%Separando músicas no sensor 1
+song1 = aux(1:1,:, 1); %song 1 nota 1
+song2 =  aux(1:1,:, 2); %nota 3
+song11 = aux(1:1,:, 11); %song 1 %nota 5
+
+%song11_sensor2 = aux(2:2,:, 11);
+
 %%
 figure(1)
 tt = (1:length(rest_1))*dt;
@@ -18,7 +23,7 @@ plot(tt, rest_1)
 hold off
 %%
 figure (2)
-[pxx1,f1]=pwelch(song2_sensor1,2*sr,sr/2,[],sr);
+[pxx1,f1]=pwelch(song1,2*sr,sr/2,[],sr);
 
 plot(f1, pxx1)
 
@@ -37,7 +42,7 @@ axis xy
 %%
 %Espectograma da musica
 figure(4)
-[s,f,t]=spectrogram(song1_sensor1,2*sr,sr/2,[],sr);
+[s,f,t]=spectrogram(song1,2*sr,sr/2,[],sr);
 imagesc(t,f,abs(s))
 colorbar
 clim([0 50]) %caxis não é recomendado
@@ -49,7 +54,7 @@ axis xy
 %%
 %Espectograma da musica
 figure(5)
-[s,f,t]=spectrogram(song2_sensor1,2*sr,sr/2,[],sr);
+[s,f,t]=spectrogram(song2,2*sr,sr/2,[],sr);
 imagesc(t,f,abs(s))
 colorbar
 clim([0 50]) %caxis não é recomendado
@@ -57,3 +62,16 @@ ylim([0 50])
 ylabel('Frequencia (Hz)')
 xlabel('Time (s)')
 axis xy
+
+%%
+%Espectograma da musica
+figure(6)
+[s,f,t]=spectrogram(song11,2*sr,sr/2,[],sr);
+imagesc(t,f,abs(s))
+colorbar
+clim([0 50]) %caxis não é recomendado
+ylim([0 50])
+ylabel('Frequencia (Hz)')
+xlabel('Time (s)')
+axis xy
+
