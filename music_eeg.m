@@ -1,4 +1,4 @@
-load('music_listening_experiment_s01.mat')
+load('Music-EEG-main/music_listening_experiment_s01.mat')
 
 sr = Fs; % taxa de amostragem
 dt = 1/sr; % período infinitesimal
