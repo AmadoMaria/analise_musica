@@ -3,22 +3,32 @@ load('Music-EEG-main/music_listening_experiment_s01.mat')
 sr = Fs; % taxa de amostragem
 dt = 1/sr; % período infinitesimal
 
-rest_1 = EEG_Rest(1:1,:);
+rest_1 = EEG_Rest(7:7,:);
 
 % Reordenando os dados para acessar a música pela paginação
 aux = permute(EEG_Songs,[2 3 1]);
 
+sensor_index = 7; %o1 = 7 e o2 = 8
+
 %Separando músicas no sensor 1
-song1 = aux(2:2,:, 1); %song 1 nota 1
-song2 =  aux(2:2,:, 2); %nota 3
-song11 = aux(2:2,:, 11); %nota 5
+song1 = aux(sensor_index:sensor_index,:, 1); %song 1 nota 1
+song2 =  aux(sensor_index:sensor_index,:, 2); %nota 3
+song11 = aux(sensor_index:sensor_index,:, 11); %nota 5
 
 %%
 figure(1)
-tt = (1:length(rest_1))*dt;
+tt_rest = (1:length(rest_1))*dt;
+tt = (1:length(song1))*dt;
 hold on
-plot(tt, rest_1)
+plot(tt_rest, rest_1)
+plot(tt, song1)
+plot(tt, song2)
+plot(tt, song11)
 hold off
+legend('rest','song 1', 'song 3', 'song 5')
+ylabel('DDP (mmV)')
+xlabel('Time (ms)')
+axis xy
 %%
 figure (2)
 [pxx1,f1]=pwelch(song1,2*sr,sr/2,[],sr);
@@ -34,7 +44,7 @@ colorbar
 clim([0 50]) %caxis não é recomendado
 ylim([0 50])
 ylabel('Frequencia (Hz)')
-xlabel('Time (s)')
+xlabel('Time (ms)')
 axis xy
 
 %%
@@ -50,7 +60,7 @@ xlabel('Time (s)')
 axis xy
 
 %%
-%Espectograma da musica
+%Espectrograma da musica
 figure(5)
 [s,f,t]=spectrogram(song2,2*sr,sr/2,[],sr);
 imagesc(t,f,abs(s))
@@ -62,7 +72,7 @@ xlabel('Time (s)')
 axis xy
 
 %%
-%Espectograma da musica
+%Espectrograma da musica
 figure(6)
 [s,f,t]=spectrogram(song11,2*sr,sr/2,[],sr);
 imagesc(t,f,abs(s))
