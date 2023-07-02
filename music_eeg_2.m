@@ -1,11 +1,11 @@
-load('Music-EEG-main/music_listening_experiment_s02.mat')
+load('Music-EEG-main/music_listening_experiment_s20.mat')
 
 sr = Fs; % taxa de amostragem
 dt = 1/sr; % período infinitesimal
 
 % Reordenando os dados para acessar a música pela paginação
 aux = permute(EEG_Songs,[2 3 1]);
-sensor_index = 8;
+sensor_index = 7;
 
 
 %% Ondas alfa
@@ -20,9 +20,13 @@ pxx_5 = zeros(129);
 
 for i=1:30
     %usar a média dos sensores
-    song = aux(sensor_index:sensor_index,:, i);
-    filtered_song = eegfilt(song, sr, 8, 12);
-    [pxx,f]=pwelch(filtered_song,2*sr,sr/2,[],sr);
+    song_o1 = aux(7:7,:, i);
+    song_o2 = aux(8:8,:, i);
+    filtered_song_o1 = eegfilt(song_o1, sr, 8, 12);
+    filtered_song_o2 = eegfilt(song_o2, sr, 8, 12);
+    [pxx_o1,f_o1]=pwelch(filtered_song_o1,2*sr,sr/2,[],sr);
+    [pxx_o2,f_o2]=pwelch(filtered_song_o2,2*sr,sr/2,[],sr);
+    pxx = (pxx_o1 + pxx_o2)/2; % média dos sensores
     if song_ratings(i) == 1
         pxx_1 = pxx_1 + pxx;
         count_1 = count_1 + 1;
@@ -47,6 +51,6 @@ plot(f, pxx_5)
 title('Power Spectral Density (PSD)')
 set(gca,'XLim',[0 30])
 hold off
-legend('song1','song3', 'song5')
+legend('songs1','songs3', 'songs5')
 ylabel('Potência (mV^2/Hz)')
 xlabel('Frequência (Hz)')
