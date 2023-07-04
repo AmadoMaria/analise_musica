@@ -54,7 +54,7 @@ filtered_rest_o2 = eegfilt(rest_o2, sr, 8, 12);
 pxx_rest = (pxx_rest_o1 + pxx_rest_o2)/2;
 
 
-figure(7)
+figure(1)
 hold on
 plot(f_rest, pxx_rest)
 plot(f, pxx_1)

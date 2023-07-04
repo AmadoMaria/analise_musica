@@ -33,7 +33,6 @@ axis xy
 %%
 figure (2)
 [pxx1,f1]=pwelch(song1,2*sr,sr/2,[],sr);
-
 plot(f1, pxx1)
 
 %%
