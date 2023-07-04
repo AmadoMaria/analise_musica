@@ -28,7 +28,7 @@ plot(tt, song11)
 hold off
 legend('rest','song 1', 'song 3', 'song 5')
 ylabel('DDP (mmV)')
-xlabel('Time (ms)')
+xlabel('Time (s)')
 axis xy
 %%
 figure (2)
@@ -44,7 +44,7 @@ colorbar
 clim([0 50]) %caxis não é recomendado
 ylim([0 50])
 ylabel('Frequencia (Hz)')
-xlabel('Time (ms)')
+xlabel('Time (s)')
 axis xy
 
 %%
@@ -56,7 +56,7 @@ colorbar
 clim([0 50])
 ylim([0 50])
 ylabel('Frequencia (Hz)')
-xlabel('Time (ms)')
+xlabel('Time (s)')
 axis xy
 
 %%
@@ -68,7 +68,7 @@ colorbar
 clim([0 50])
 ylim([0 50])
 ylabel('Frequencia (Hz)')
-xlabel('Time (ms)')
+xlabel('Time (s)')
 axis xy
 
 %%
@@ -80,7 +80,7 @@ colorbar
 clim([0 50]) %caxis não é recomendado
 ylim([0 50])
 ylabel('Frequencia (Hz)')
-xlabel('Time (ms)')
+xlabel('Time (s)')
 axis xy
 
 %% Ondas alfa
