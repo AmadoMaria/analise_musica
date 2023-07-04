@@ -1,4 +1,6 @@
+% Selecione o sujeito que deseja analisar
 load('Music-EEG-main/music_listening_experiment_s20.mat')
+
 
 sr = Fs; % taxa de amostragem
 dt = 1/sr; % período infinitesimal
@@ -19,7 +21,7 @@ pxx_3 = zeros(129);
 pxx_5 = zeros(129);
 
 for i=1:30
-    %usar a média dos sensores
+    %usando a média dos sensores
     song_o1 = aux(7:7,:, i);
     song_o2 = aux(8:8,:, i);
     filtered_song_o1 = eegfilt(song_o1, sr, 8, 12);

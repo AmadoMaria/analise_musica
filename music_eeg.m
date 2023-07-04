@@ -1,3 +1,4 @@
+% Selecione o sujeito que deseja analisar
 load('Music-EEG-main/music_listening_experiment_s01.mat')
 
 sr = Fs; % taxa de amostragem
@@ -53,10 +54,10 @@ figure(4)
 [s,f,t]=spectrogram(song1,2*sr,sr/2,[],sr);
 imagesc(t,f,abs(s))
 colorbar
-clim([0 50]) %caxis não é recomendado
+clim([0 50])
 ylim([0 50])
 ylabel('Frequencia (Hz)')
-xlabel('Time (s)')
+xlabel('Time (ms)')
 axis xy
 
 %%
@@ -65,10 +66,10 @@ figure(5)
 [s,f,t]=spectrogram(song2,2*sr,sr/2,[],sr);
 imagesc(t,f,abs(s))
 colorbar
-clim([0 50]) %caxis não é recomendado
+clim([0 50])
 ylim([0 50])
 ylabel('Frequencia (Hz)')
-xlabel('Time (s)')
+xlabel('Time (ms)')
 axis xy
 
 %%
@@ -80,7 +81,7 @@ colorbar
 clim([0 50]) %caxis não é recomendado
 ylim([0 50])
 ylabel('Frequencia (Hz)')
-xlabel('Time (s)')
+xlabel('Time (ms)')
 axis xy
 
 %% Ondas alfa
